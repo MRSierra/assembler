@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  1                                                                    10/01/2017 17:19:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\1.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 1.a51 SET(SMALL) DEBUG PRINT(.\Listings\1.lst) OBJECT(.\Objects\1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para cargar los registros
+
+                       2     ;con los siguientes valores: A 0FH, R0 12H,
+
+                       3     ;R1 34H, R2 56H, R3 78H, R4 09H, R5 ACC.
+
+                       4     
+
+0000                   5                     ORG 0000H
+
+0000 803E              6                     SJMP MAIN1
+
+0040                   7                     ORG 0040H
+
+0040 740F              8     MAIN1:  MOV A,#0FH
+
+0042 7812              9                     MOV R0,#12H
+
+0044 7934             10                     MOV R1,#34H
+
+0046 7A56             11                     MOV R2,#56H
+
+0048 7B78             12                     MOV R3,#78H
+
+004A 7C09             13                     MOV R4,#09H
+
+004C FD               14                     MOV R5,A
+
+                      15                     END
+
+A51 MACRO ASSEMBLER  1                                                                    10/01/2017 17:19:00 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN1. . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

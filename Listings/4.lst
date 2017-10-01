@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  4                                                                    10/01/2017 17:19:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\4.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 4.a51 SET(SMALL) DEBUG PRINT(.\Listings\4.lst) OBJECT(.\Objects\4
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa que sume el contenido de R4 y R6 y lo ponga en R2
+
+                       2     
+
+0000                   3                     ORG 0000H
+
+0000 803E              4                     SJMP MAIN4
+
+0040                   5                     ORG 0040H
+
+0040 EC                6     MAIN4:  MOV A,R4
+
+0041 2E                7                     ADD A,R6
+
+0042 FA                8                     MOV R2,A
+
+                       9                     END
+
+A51 MACRO ASSEMBLER  4                                                                    10/01/2017 17:19:00 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN4. . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

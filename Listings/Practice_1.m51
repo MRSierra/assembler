@@ -1,0 +1,87 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/01/2017  17:25:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\USERS\MARIANA\C51\BIN\BL51.EXE .\Objects\1.obj, .\Objects\4.obj, .\Objects\7.obj TO .\Objects\Practice_1 PRINT (.\Lis
+>> tings\Practice_1.m51) RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\1.obj (1)
+  .\Objects\4.obj (4)
+  .\Objects\7.obj (7)
+
+
+LINK MAP OF MODULE:  .\Objects\Practice_1 (1)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     004DH     ABSOLUTE     
+* OVERLAP * CODE    0000H     0043H     ABSOLUTE     
+* OVERLAP * CODE    0000H     004CH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Practice_1 (1)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        1
+  C:0040H         SYMBOL        MAIN1
+  C:0000H         LINE#         6
+  C:0040H         LINE#         8
+  C:0042H         LINE#         9
+  C:0044H         LINE#         10
+  C:0046H         LINE#         11
+  C:0048H         LINE#         12
+  C:004AH         LINE#         13
+  C:004CH         LINE#         14
+  -------         ENDMOD        1
+
+  -------         MODULE        4
+  C:0040H         SYMBOL        MAIN4
+  C:0000H         LINE#         4
+  C:0040H         LINE#         6
+  C:0041H         LINE#         7
+  C:0042H         LINE#         8
+  -------         ENDMOD        4
+
+  -------         MODULE        7
+  C:0040H         SYMBOL        MAIN7
+  C:0000H         LINE#         7
+  C:0040H         LINE#         9
+  C:0041H         LINE#         10
+  C:0042H         LINE#         11
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/01/2017  17:25:19  PAGE 2
+
+
+  C:0043H         LINE#         12
+  C:0044H         LINE#         13
+  C:0045H         LINE#         14
+  C:0047H         LINE#         15
+  C:0048H         LINE#         16
+  C:0049H         LINE#         17
+  C:004BH         LINE#         18
+  -------         ENDMOD        7
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      004CH
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      004CH
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0022H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=220
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

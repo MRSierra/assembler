@@ -1,0 +1,64 @@
+A51 MACRO ASSEMBLER  7                                                                    10/01/2017 17:22:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\7.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 7.a51 SET(SMALL) DEBUG PRINT(.\Listings\7.lst) OBJECT(.\Objects\7
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para separar el contenido del R0 en dos grupos de 4 bits.
+
+                       2     ;Guardar el grupo de los 4 bits más significativos en los 4 bits menos significativos 
+
+                       3     ;del registro R1 y los 4 bits menos significativos en los 4 bits menos significativos 
+
+                       4     ;del registro R2. Los 4 bits más significativos de R1 y R2, deben quedar en cero.
+
+                       5     
+
+0000                   6                     ORG 0000H
+
+0000 803E              7                     SJMP MAIN7
+
+0040                   8                     ORG 0040H
+
+0040 E8                9     MAIN7:  MOV A,R0 ;Primero movemos al acumulador
+
+0041 03               10                     RR A ;Recorremos 4 veces para que los bits más significativos se vuelvan lo
+                             s menos significativos
+
+0042 03               11                     RR A
+
+0043 03               12                     RR A
+
+0044 03               13                     RR A
+
+0045 540F             14                     ANL A,#00001111b
+
+0047 F9               15                     MOV R1,A
+
+0048 E8               16                     MOV A,R0
+
+0049 540F             17                     ANL A,#00001111b
+
+004B FA               18                     MOV R2,A
+
+                      19                     END
+
+A51 MACRO ASSEMBLER  7                                                                    10/01/2017 17:22:41 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN7. . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
