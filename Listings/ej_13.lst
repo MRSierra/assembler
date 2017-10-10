@@ -1,0 +1,251 @@
+A51 MACRO ASSEMBLER  EJ_13                                                                10/09/2017 19:14:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\ej_13.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE Ejercicios de apoyo\ej_13.asm SET(SMALL) DEBUG PRINT(.\Listings\e
+                      j_13.lst) OBJECT(.\Objects\ej_13.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para que encuentre el elemento más pequeño de una lista de
+
+                       2     ;números de 16 bits sin signo que están en localidades consecutivas de memoria.
+
+                       3     ;La dirección del primer elemento de la lista se encuentra en las localidades
+
+                       4     ;1900H y 1901H, el número de elementos del arreglo está en la localidad 1902H.
+
+                       5     ;El elemento más pequeño encontrado debe guardarse en la localidad 1903H.
+
+  00A2                 6                    DPS EQU 0A2H
+
+0000                   7                    ORG 00H
+
+0000 803E              8                    JMP main
+
+0040                   9                                             ORG 40H
+
+0040                  10     main:
+
+                      11                    ;Guarda direccion de guardado del dato menor en la lista
+
+0040 75A201           12                    MOV DPS,#1
+
+0043 901903           13                    MOV DPTR, #1903H
+
+0046 75A200           14                    MOV DPS,#0
+
+                      15                    ;Obtiene la direccion de inicio de la lista de numeros
+
+0049 901900           16                    MOV DPTR, #1900H
+
+004C E0               17                    MOVX A, @DPTR
+
+004D F8               18                    MOV R0,A
+
+                      19     
+
+004E A3               20                    INC DPTR ;=1901H
+
+004F E0               21                    MOVX A, @DPTR
+
+0050 F9               22                    MOV R1,A
+
+                      23                    ;Direccion de inicio de la lista = R0R1 H
+
+                      24     
+
+                      25                    ;Obtiene el numero de elementos en la lista
+
+0051 A3               26                    INC DPTR ;=1902H
+
+0052 E0               27                    MOVX A, @DPTR
+
+0053 FA               28                    MOV R2,A
+
+                      29                    ;Numero de elementos = R2H
+
+                      30     
+
+                      31                    ;Establece la direccion de inicio de lectura de la lista
+
+0054 8883             32                    MOV DPH, R0
+
+0056 8982             33                    MOV DPL, R1
+
+                      34     
+
+                      35     
+
+                      36                    ;Primer ciclo, se guarda el primer valor de la lista como mayor
+
+0058 D2D6             37                    SETB AC
+
+005A                  38     lectura:
+
+005A 75A200           39                    MOV DPS,#0
+
+005D E0               40                    MOVX A, @DPTR
+
+005E FB               41                    MOV R3,A
+
+005F A3               42                    INC DPTR
+
+0060 E0               43                    MOVX A, @DPTR
+
+0061 FC               44                    MOV R4,A
+
+0062 A3               45                    INC DPTR
+
+                      46                    ;Numero leido de la lista = R3R4H
+
+                      47     
+
+0063 75A201           48                    MOV DPS,#1
+
+0066 E0               49                    MOVX A, @DPTR
+
+0067 FD               50                    MOV R5,A
+
+0068 A3               51                    INC DPTR
+
+0069 E0               52                    MOVX A, @DPTR
+
+006A FE               53                    MOV R6,A
+
+006B 1582             54                    DEC DPL
+
+                      55     
+
+                      56                    ;Numero leido de la localidad de num menor = R5R6H
+
+                      57     
+
+A51 MACRO ASSEMBLER  EJ_13                                                                10/09/2017 19:14:40 PAGE     2
+
+006D 10D61C           58                    JBC AC, cambioMenor ;Solo si es el primer ciclo
+
+                      59     
+
+0070 EC               60                    MOV A, R4
+
+0071 B50600           61                                                  CJNE A,06H,compararL ;CJNE R4,R6,compararL
+
+                      62     
+
+                      63                    ;Si el nuevo numero (en la parte baja) es menor al guardado(en
+
+                      64                    ;la parte baja), se prende el CY
+
+                      65     
+
+0074                  66     compararL:
+
+0074 4002             67                                             JC compararH
+
+0076 D2D6             68                    SETB AC
+
+                      69     
+
+0078                  70     compararH:
+
+0078 C3               71                    CLR C
+
+0079 EB               72                                             MOV A,R3
+
+007A B50500           73                                             CJNE A,05H,nuevoMenor ;CJNE R3,R5,nuevoMenor
+
+                      74                    ;Si el nuevo numero (en la parte alta) es menor al guardado (en
+
+                      75                    ;la parte alta), se prende el CY
+
+                      76     
+
+007D                  77     nuevoMenor:
+
+007D 400D             78                                                  JC cambioMenor
+
+                      79     
+
+                      80                    ;Son ceros (las partes altas) u otro caso
+
+007F EB               81                    MOV A,R3
+
+0080 6002             82                    JZ cero1
+
+0082 D2D6             83                    SETB AC
+
+0084                  84     cero1:
+
+0084 ED               85                    MOV A,R5
+
+0085 6002             86                    JZ cero2
+
+0087 800B             87                    JMP contCiclo
+
+                      88     
+
+0089                  89     cero2:
+
+0089 10D608           90                    JBC AC, contCiclo
+
+                      91                    ;JMP cambioMenor
+
+008C                  92     cambioMenor:
+
+008C C3               93                    CLR C
+
+008D EB               94                                                  MOV A, R3
+
+008E F0               95                    MOVX @DPTR,A
+
+008F A3               96                    INC DPTR
+
+0090 EC               97                    MOV A, R4
+
+0091 F0               98                    MOVX @DPTR,A
+
+0092 1582             99                    DEC DPL
+
+                     100     
+
+0094                 101     contCiclo:
+
+0094 DAC4            102                    DJNZ R2, lectura ;Ciclo para leer
+
+                     103     
+
+0096 80FE            104                                                  JMP $
+
+                     105     
+
+                     106                    END
+
+A51 MACRO ASSEMBLER  EJ_13                                                                10/09/2017 19:14:40 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AC . . . . . . . .  B ADDR   00D0H.6 A   
+CAMBIOMENOR. . . .  C ADDR   008CH   A   
+CERO1. . . . . . .  C ADDR   0084H   A   
+CERO2. . . . . . .  C ADDR   0089H   A   
+COMPARARH. . . . .  C ADDR   0078H   A   
+COMPARARL. . . . .  C ADDR   0074H   A   
+CONTCICLO. . . . .  C ADDR   0094H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   00A2H   A   
+LECTURA. . . . . .  C ADDR   005AH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+NUEVOMENOR . . . .  C ADDR   007DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

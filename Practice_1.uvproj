@@ -85,7 +85,7 @@
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
-          <SelectedForBatchBuild>0</SelectedForBatchBuild>
+          <SelectedForBatchBuild>1</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
         </TargetCommonOption>
         <CommonProperty>
@@ -364,9 +364,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>10.a51</FileName>
+              <FileName>16.a51</FileName>
               <FileType>2</FileType>
-              <FilePath>.\10.a51</FilePath>
+              <FilePath>.\16.a51</FilePath>
             </File>
           </Files>
         </Group>

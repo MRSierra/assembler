@@ -1,0 +1,163 @@
+A51 MACRO ASSEMBLER  16                                                                   10/09/2017 23:19:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\16.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 16.a51 SET(SMALL) DEBUG PRINT(.\Listings\16.lst) OBJECT(.\Objects
+                      \16.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa que justifique una fracción binaria de 16 bits 
+
+                       2     ;que se encuentra en las localidades 1C00H y 1C01H desplazando el
+
+                       3     ;número hacia la izquierda hasta que el bit más significativo sea 
+
+                       4     ;1. Guardar el resultado en las direcciones 1C02H y 1C03H y 
+
+                       5     ;el número de desplazamientos en la dirección 1C04H. Si el contendido de las
+
+                       6     ;direcciones 1C00H y 1C01H es cero, entonces escribir ceros en las direcciones 
+
+                       7     ;1C02H, 1C03H y 1C04H. Este proceso se utiliza para convertir un número a notación científi
+                             ca
+
+                       8     
+
+0000                   9                     ORG 0000H
+
+0000 803E             10                     JMP MAIN
+
+0040                  11                     ORG 0040H
+
+0040 901C00           12     MAIN:   MOV DPTR,#1C00H         ;Guardar el número a evaluar
+
+0043 E0               13                     MOVX A, @DPTR
+
+0044 F8               14                     MOV R0,A                        ;R0R1
+
+0045 A3               15                     INC DPTR
+
+0046 E0               16                     MOVX A, @DPTR
+
+0047 F9               17                     MOV R1,A
+
+                      18                     
+
+0048 E8               19                     MOV A,R0
+
+0049 601E             20                     JZ CERO_L
+
+                      21                     
+
+004B E8               22     CONTINUE:       MOV A, R0               ;PRIMERO REVISAMOS SI EL BIT MÁS SIGNIFICATIVO ES 1
+
+004C 33               23                             RLC A
+
+004D 9290             24                             MOV P1.0,C
+
+004F 13               25                             RRC A
+
+0050 209009           26                             JB P1.0,RES             ;SI ES UNO MANDA EL RESULTADO
+
+0053 E9               27                             MOV A, R1               ;SI NO, DESPLAZAMOS EL LOW
+
+0054 33               28                             RLC A
+
+0055 F9               29                             MOV R1,A
+
+0056 E8               30                             MOV A, R0               ;DESPLAZAMOS EL HIGH
+
+0057 33               31                             RLC A
+
+0058 F8               32                             MOV R0,A
+
+0059 0A               33                             INC R2
+
+005A 80EF             34                             JMP CONTINUE
+
+                      35     
+
+005C 901C02           36     RES:            MOV DPTR,#1C02H
+
+005F E8               37                             MOV A,R0
+
+0060 F0               38                             MOVX @DPTR,A
+
+0061 A3               39                             INC DPTR
+
+0062 E9               40                             MOV A,R1
+
+0063 F0               41                             MOVX @DPTR,A
+
+0064 A3               42                             INC DPTR
+
+0065 EA               43                             MOV A,R2
+
+0066 F0               44                             MOVX @DPTR,A
+
+                      45                             
+
+0067 80FE             46                             JMP $
+
+                      47                     
+
+                      48                     
+
+0069 E9               49     CERO_L:         MOV A,R1
+
+006A 6002             50                             JZ CERO_RES
+
+006C 80DD             51                             JMP CONTINUE
+
+                      52                             
+
+006E 901C02           53     CERO_RES:       MOV DPTR,#1C02H         ;el resultado = 0
+
+0071 7400             54                             MOV A,#00H
+
+0073 F0               55                             MOVX @DPTR,A
+
+0074 A3               56                             INC DPTR                        ;el resultado_low = 0
+
+A51 MACRO ASSEMBLER  16                                                                   10/09/2017 23:19:33 PAGE     2
+
+0075 F0               57                             MOVX @DPTR,A
+
+0076 A3               58                             INC DPTR                        ;desplazamientos = 0
+
+0077 F0               59                             MOVX @DPTR,A
+
+                      60                             
+
+0078 80FE             61                             JMP $
+
+                      62                                     
+
+                      63                             END
+
+                                                     
+
+                                                     
+
+A51 MACRO ASSEMBLER  16                                                                   10/09/2017 23:19:33 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CERO_L . . . . . .  C ADDR   0069H   A   
+CERO_RES . . . . .  C ADDR   006EH   A   
+CONTINUE . . . . .  C ADDR   004BH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+RES. . . . . . . .  C ADDR   005CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

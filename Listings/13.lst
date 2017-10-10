@@ -1,0 +1,178 @@
+A51 MACRO ASSEMBLER  13                                                                   10/09/2017 19:28:36 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\13.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 13.a51 SET(SMALL) DEBUG PRINT(.\Listings\13.lst) OBJECT(.\Objects
+                      \13.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para que encuentre el elemento más pequeño de 
+
+                       2     ;una lista de números de 16 bits sin signo que están en localidades 
+
+                       3     ;consecutivas de memoria. La dirección del primer elemento de la lista 
+
+                       4     ;se encuentra en las localidades 1900H y 1901H, el número de elementos
+
+                       5     ;del arreglo está en la localidad 1902H. El elemento más pequeño
+
+                       6     ;encontrado debe guardarse en la localidad 1903H.
+
+                       7     
+
+  00A2                 8     DPS EQU 0A2H
+
+                       9     
+
+0000                  10                             ORG 0000H
+
+0000 803E             11                             SJMP PREPARACION
+
+0040                  12                             ORG 0040H
+
+                      13                             ; primero hay que guardar todas las posciones con el DPS
+
+0040 75A200           14     PREPARACION:    MOV DPS, #0                     ;en el DPTR version 0 se guardará el elemen
+                             to más pequeño
+
+0043 901903           15                                     MOV DPTR, #1903H
+
+                      16                                     
+
+0046 75A201           17                                     MOV DPS, #1
+
+0049 901900           18                                     MOV DPTR, #1900H        ;en el DPTR version 1 se guardará e
+                             l elemento de la lista, el apuntador
+
+                      19                                     
+
+004C E0               20                                     MOVX A,@DPTR                    ;por ser la primera vez
+
+004D F8               21                                     MOV R0, A                       ;guardar en el R0 el valor 
+                             a comparar HIGH
+
+004E A3               22                                     INC DPTR
+
+004F E0               23                                     MOVX A,@DPTR
+
+0050 F9               24                                     MOV R1, A                       ;guardar en el R1 el valor 
+                             a comparar LOW, R0R1
+
+                      25                                     
+
+0051 A3               26                                     INC DPTR
+
+0052 E0               27                                     MOVX A,@DPTR
+
+0053 FA               28                                     MOV R2, A                       ;guardar el número de eleme
+                             ntos de la lista
+
+                      29                                     
+
+0054 1582             30                                     DEC DPL
+
+0056 1582             31                                     DEC DPL                         ;regresar al punto donde em
+                             pieza la lista
+
+                      32     
+
+0058 75A200           33     SETMENOR:               MOV DPS,#0                      ;accedemos a la version del DPTR do
+                             nde esta el más pequeño
+
+005B E8               34                                     MOV A, R0
+
+005C F0               35                                     MOVX @DPTR,A
+
+005D A3               36                                     INC DPTR                        ;guardamos parte alta
+
+005E E9               37                                     MOV A, R1
+
+005F F0               38                                     MOVX @DPTR,A            ;guardamos parte baja
+
+0060 1582             39                                     DEC DPL                         ;apuntamos a parte alta
+
+                      40                                     
+
+0062 DA02             41     CONTINUAR:              DJNZ R2,MOVER           ;ciclo, si el R2 donde guardamos el más peq
+                             ueño NO es cero (aún hay elementos) salta
+
+0064 80FE             42                                     JMP $
+
+                      43                                             
+
+0066 75A201           44     MOVER:                  MOV DPS,#1                      ;apuntar al siguiente de la lista
+
+0069 A3               45                                     INC DPTR
+
+006A A3               46                                     INC DPTR
+
+                      47                                     
+
+006B 75A200           48                                     MOV DPS,#0                      ;variable flotante para com
+                             parar, R3R4 menor
+
+A51 MACRO ASSEMBLER  13                                                                   10/09/2017 19:28:36 PAGE     2
+
+006E E0               49                                     MOVX A,@DPTR
+
+006F FB               50                                     MOV R3,A
+
+0070 A3               51                                     INC DPTR
+
+0071 E0               52                                     MOVX A,@DPTR
+
+0072 FC               53                                     MOV R4,A
+
+0073 1582             54                                     DEC DPL
+
+                      55                                     
+
+0075 E8               56                                     MOV A,R0                        ;comparar el menor
+
+                      57                                     
+
+0076 B50300           58                                     CJNE A,03H, COMPARAR    ;si el de la lista (R0) es menor qu
+                             e el menor guardaro (R3) comparar
+
+                      59     
+
+0079 4000             60     COMPARAR:               JC      COMPARARH
+
+                      61     
+
+007B E9               62     COMPARARH:              MOV A,R1                        ;comparar parte alta
+
+007C B504D9           63                                     CJNE A,04H, SETMENOR
+
+007F 80E1             64                                     JMP CONTINUAR
+
+                      65                                     
+
+                      66                                     END
+
+                                                             
+
+A51 MACRO ASSEMBLER  13                                                                   10/09/2017 19:28:36 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COMPARAR . . . . .  C ADDR   0079H   A   
+COMPARARH. . . . .  C ADDR   007BH   A   
+CONTINUAR. . . . .  C ADDR   0062H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   00A2H   A   
+MOVER. . . . . . .  C ADDR   0066H   A   
+PREPARACION. . . .  C ADDR   0040H   A   
+SETMENOR . . . . .  C ADDR   0058H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
