@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/09/2017  19:49:46  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/09/2017  19:50:54  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\Practice_1 (6)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0052H     ABSOLUTE     
+            CODE    0000H     0054H     ABSOLUTE     
 
 
 
@@ -44,11 +44,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\Practice_1 (6)
   C:004CH         LINE#         12
   C:004FH         LINE#         13
   C:0050H         LINE#         14
+  C:0052H         LINE#         15
   -------         ENDMOD        6
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0014H BYTE ( 0%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0016H BYTE ( 1%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=82
+Program Size: data=8.0 xdata=0 code=84
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
