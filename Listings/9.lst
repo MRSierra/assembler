@@ -1,0 +1,132 @@
+A51 MACRO ASSEMBLER  9                                                                    10/10/2017 01:52:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\9.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 9.a51 SET(SMALL) DEBUG PRINT(.\Listings\9.lst) OBJECT(.\Objects\9
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  REG                  1     CONTN EQU R3
+
+  REG                  2     CONTP EQU R4
+
+  REG                  3     CONT0 EQU R5
+
+                       4     
+
+0000                   5     ORG 00H
+
+0000 803E              6     JMP main
+
+0040                   7     ORG 40H
+
+                       8     
+
+0040 901940            9     main:   MOV DPTR, #1940H
+
+0043 E0               10                     MOVX A, @DPTR
+
+0044 F8               11                     MOV R0, A
+
+0045 A3               12                     INC DPTR
+
+0046 E0               13                     MOVX A, @DPTR
+
+0047 F9               14                     MOV R1, A
+
+0048 A3               15                     INC DPTR
+
+0049 E0               16                     MOVX A, @DPTR
+
+004A FA               17                     MOV R2, A
+
+004B 8883             18                     MOV DPH, R0
+
+004D 8982             19                     MOV DPL, R1
+
+                      20     
+
+004F E0               21     CICLO:  MOVX A, @DPTR
+
+0050 7003             22                     JNZ CHECAR
+
+0052 0D               23                     INC CONT0
+
+0053 8007             24                     JMP REGRESO
+
+                      25     
+
+0055                  26     CHECAR: 
+
+0055 20E7FD           27                     JB 0E7H, CHECAR
+
+0058 0C               28                     INC CONTP
+
+0059 8001             29                     JMP REGRESO
+
+                      30     
+
+005B                  31     SUMAN:
+
+005B 0B               32                     INC CONTN
+
+                      33     
+
+005C A3               34     REGRESO:        INC DPTR
+
+005D DAF0             35                             DJNZ R2, CICLO
+
+                      36     
+
+005F EB               37                             MOV A, CONTN
+
+0060 901943           38                             MOV DPTR, #1943H
+
+0063 F0               39                             MOVX @DPTR, A
+
+                      40     
+
+0064 ED               41                             MOV A, CONT0
+
+0065 901944           42                             MOV DPTR, #1944H
+
+0068 F0               43                             MOVX @DPTR, A
+
+                      44     
+
+0069 EC               45                     MOV A, CONTP
+
+006A 901945           46                             MOV DPTR, #1945H
+
+006D F0               47                             MOVX @DPTR, A
+
+                      48     
+
+                      49                             END
+
+A51 MACRO ASSEMBLER  9                                                                    10/10/2017 01:52:50 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECAR . . . . . .  C ADDR   0055H   A   
+CICLO. . . . . . .  C ADDR   004FH   A   
+CONT0. . . . . . .    REG    R5          
+CONTN. . . . . . .    REG    R3          
+CONTP. . . . . . .    REG    R4          
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+REGRESO. . . . . .  C ADDR   005CH   A   
+SUMAN. . . . . . .  C ADDR   005BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

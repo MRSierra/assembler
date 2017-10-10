@@ -1,0 +1,70 @@
+A51 MACRO ASSEMBLER  12                                                                   10/10/2017 02:29:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\12.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 12.a51 SET(SMALL) DEBUG PRINT(.\Listings\12.lst) OBJECT(.\Objects
+                      \12.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; Hacer un programa que multiplique el contenido 
+
+                       2     ; binario del registro R0 (<20h) por 7 y guarde el 
+
+                       3     ; resultado en el registro R1. Hacer en dos versiones, 
+
+                       4     ; con y sin utilizar la instrucción de multiplicación.
+
+                       5                     
+
+0000                   6                     ORG 0000H
+
+0000 803E              7                     JMP MAIN
+
+0040                   8                     ORG 0040H
+
+                       9                     
+
+                      10                     ;Version 1
+
+0040 7A07             11     MAIN:   MOV R2, #7H
+
+0042 28               12     CICLO:  ADD A, R0
+
+0043 DAFD             13                     DJNZ R2, CICLO
+
+0045 F9               14                     MOV R1, A
+
+                      15                     
+
+                      16     ;Version2
+
+0046 7819             17                     MOV R0, #19H
+
+0048 7A07             18                     MOV R2, #7H
+
+004A E8               19                     MOV A, R0
+
+                      20                     
+
+                      21                     END
+
+                             
+
+A51 MACRO ASSEMBLER  12                                                                   10/10/2017 02:29:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CICLO. . . . . . .  C ADDR   0042H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
