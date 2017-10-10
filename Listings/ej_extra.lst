@@ -1,0 +1,72 @@
+A51 MACRO ASSEMBLER  EJ_EXTRA                                                             10/09/2017 18:54:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\ej_extra.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE Ejercicios de apoyo\ej_extra.a51 SET(SMALL) DEBUG PRINT(.\Listing
+                      s\ej_extra.lst) OBJECT(.\Objects\ej_extra.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; MOVER TABLAS
+
+                       2     ; R0 SERA EL APUTNADOR QUE RECORRE LA PAGINA 
+
+                       3     ; R1 ES LA PAGINA FUENTE
+
+                       4     ; R2 ES LA PAGINA DESTINO
+
+                       5     
+
+                       6     
+
+0000                   7                ORG 0000H
+
+0000 803E              8                SJMP MAIN
+
+0040                   9                ORG 0040H
+
+0040 7800             10     MAIN:  MOV R0,#00H  ; cARGA EL APUNTADOR
+
+0042 7903             11            MOV R1,#03H
+
+0044 7A05             12                MOV R2,#05H  ; ______________
+
+0046 8882             13     SALT0: MOV DPL, R0
+
+0048 8983             14            MOV DPH,R1 
+
+004A E0               15                MOVX A,@DPTR ; LEE DATO DE FUENTE 
+
+004B 8A83             16                MOV DPH,R2   ; ______________    
+
+004D F0               17                MOVX @DPTR,A ; ______________
+
+004E 08               18                INC R0           ; ______________
+
+004F E8               19                MOV A,R0     ; ______________
+
+0050 70F4             20                JNZ SALT0     ;
+
+0052 80FE             21                SJMP $ 
+
+                      22                END
+
+A51 MACRO ASSEMBLER  EJ_EXTRA                                                             10/09/2017 18:54:38 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+SALT0. . . . . . .  C ADDR   0046H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

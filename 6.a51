@@ -1,0 +1,16 @@
+		ORG 0000H
+		JMP MAIN
+		ORG 0040H
+MAIN:	MOV A,#00001010B
+		INC A
+		MOV A,#22H
+		RL A
+		XCH A,@R0	;cuando R0 = 44
+		XRL A,#27H
+		ADD A,#11H
+		RR A
+		MOV B,#3H
+		DIV AB
+		SUBB A,#1H
+		
+		END

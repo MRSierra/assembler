@@ -1,0 +1,5 @@
+		
+		ORG 0000H
+		JMP MAIN
+		ORG 0040H
+MAIN:	MOV psw,1901H

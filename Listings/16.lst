@@ -1,0 +1,39 @@
+A51 MACRO ASSEMBLER  16                                                                   10/08/2017 19:32:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\16.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 16.a51 SET(SMALL) DEBUG PRINT(.\Listings\16.lst) OBJECT(.\Objects
+                      \16.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                     
+
+0000                   2                     ORG 0000H
+
+0000 803E              3                     JMP MAIN
+
+0040                   4                     ORG 0040H
+
+0040 8501E0            5     MAIN:   MOV ACC,1901H
+
+*** _________________________________________^
+*** WARNING #A52 IN 5 (16.a51, LINE 5): VALUE HAS BEEN TRUNCATED TO 8 BITS
+*** WARNING #A41 IN 5 (16.a51, LINE 5): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  16                                                                   10/08/2017 19:32:25 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  2 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  6                                                                    10/09/2017 19:49:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\6.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 6.a51 SET(SMALL) DEBUG PRINT(.\Listings\6.lst) OBJECT(.\Objects\6
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 803E              2                     JMP MAIN
+
+0040                   3                     ORG 0040H
+
+0040 740A              4     MAIN:   MOV A,#00001010B
+
+0042 04                5                     INC A
+
+0043 7422              6                     MOV A,#22H
+
+0045 23                7                     RL A
+
+0046 C6                8                     XCH A,@R0       ;cuando R0 = 44
+
+0047 6427              9                     XRL A,#27H
+
+0049 2411             10                     ADD A,#11H
+
+004B 03               11                     RR A
+
+004C 75F003           12                     MOV B,#3H
+
+004F 84               13                     DIV AB
+
+0050 9401             14                     SUBB A,#1H
+
+                      15                     
+
+                      16                     END
+
+A51 MACRO ASSEMBLER  6                                                                    10/09/2017 19:49:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
