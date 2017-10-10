@@ -1,0 +1,201 @@
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\13_2.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 13_2.a51 SET(SMALL) DEBUG PRINT(.\Listings\13_2.lst) OBJECT(.\Obj
+                      ects\13_2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para que encuentre el elemento más pequeño de 
+
+                       2     ;una lista de números de 16 bits sin signo que están en localidades 
+
+                       3     ;consecutivas de memoria. La dirección del primer elemento de la lista 
+
+                       4     ;se encuentra en las localidades 1900H y 1901H, el número de elementos
+
+                       5     ;del arreglo está en la localidad 1902H. El elemento más pequeño
+
+                       6     ;encontrado debe guardarse en la localidad 1903H.
+
+                       7     
+
+  00A2                 8     DPS EQU 0A2H
+
+0000                   9                             ORG 0000H
+
+0000 803E             10                             JMP BEGIN
+
+0040                  11                             ORG 0040H
+
+0040 901902           12     BEGIN:          MOV DPTR,#1902H                         ;GUARDAR CANTIDAD DE DATOS EN LA LI
+                             STA R2
+
+0043 E0               13                             MOVX A,@DPTR
+
+0044 FA               14                             MOV R2,A
+
+                      15                             
+
+0045 75A200           16                             MOV DPS,#0                                      ;VERSION 0 DIRECCIO
+                             NES
+
+0048 901900           17                             MOV DPTR,#1900H                         ;GUARDAR LA DIRECCIÓN DEL I
+                             NICIO DE LA LISTA
+
+004B E0               18                             MOVX A,@DPTR
+
+004C FB               19                             MOV R3,A                                        ;R3 DIRECCIÓN HIGH 
+                             DEL APUNTADOR A LA LISTA
+
+004D A3               20                             INC DPTR
+
+004E E0               21                             MOVX A,@DPTR                            ;R4 DIRECCIÓN LOW DEL APUNT
+                             ADOR A LA LISTA
+
+004F FC               22                             MOV R4,A
+
+0050 1582             23                             DEC DPL
+
+0052 D2D6             24                             SETB AC
+
+                      25                             
+
+0054 75A201           26     DATOS:          MOV DPS,#1
+
+0057 8B82             27                             MOV DPL,R3                                      ;OBTENER EL DATO
+
+0059 E0               28                             MOVX A,@DPTR
+
+005A FD               29                             MOV R5,A                                        ;R5 DATO HIGH DEL A
+                             PUNTADOR A LA LISTA
+
+005B 8C82             30                             MOV DPL,R4
+
+005D E0               31                             MOVX A,@DPTR
+
+005E FE               32                             MOV R6,A                                        ;R6 DATO LOW DEL AP
+                             UNTADOR A LA LISTA
+
+                      33                             
+
+                      34                             
+
+005F 20D618           35                             JB AC,SETMENOR
+
+0062 ED               36                             MOV A,R5
+
+0063 B5002E           37                             CJNE A,00H,COMPARAR             ;SI EL DE LA LISTA ES MENOR AL GUAR
+                             DADO COMO MENOR
+
+                      38                             
+
+0066 EE               39                             MOV A, R6
+
+0067 B5012A           40                             CJNE A,01H,COMPARAR
+
+                      41                             
+
+                      42                             
+
+                      43                                             
+
+006A 0B               44     SUM:            INC R3
+
+006B 0B               45                             INC R3
+
+006C 0C               46                             INC R4
+
+006D 0C               47                             INC R4
+
+006E DAE4             48                             DJNZ R2,DATOS
+
+0070 901903           49                             MOV DPTR,#1903H
+
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     2
+
+0073 E8               50                             MOV A,R0
+
+0074 F0               51                             MOVX @DPTR,A
+
+0075 E9               52                             MOV A,R1
+
+0076 A3               53                             INC DPTR
+
+0077 F0               54                             MOVX @DPTR,A
+
+                      55                             
+
+0078 80FE             56                             JMP $
+
+                      57                             
+
+                      58                             
+
+007A 75D000           59     SETMENOR:       MOV PSW, #00H
+
+007D 75A200           60                             MOV DPS,#0
+
+0080 901903           61                             MOV DPTR,#1903H
+
+0083 E0               62                             MOVX A,@DPTR
+
+0084 75A201           63                             MOV DPS,#1
+
+0087 F582             64                             MOV DPL,A
+
+0089 ED               65                             MOV A,R5
+
+008A F0               66                             MOVX @DPTR,A
+
+008B EE               67                             MOV A,R6
+
+008C A3               68                             INC DPTR
+
+008D F0               69                             MOVX @DPTR,A
+
+008E ED               70                             MOV A,R5                                ;R0R1 MENOR
+
+008F F8               71                             MOV R0,A
+
+0090 EE               72                             MOV A,R6
+
+0091 F9               73                             MOV R1,A
+
+0092 80D6             74                             JMP SUM
+
+                      75     
+
+0094 40E4             76     COMPARAR:       JC SETMENOR
+
+0096 80D2             77                             JMP SUM
+
+                      78                             
+
+                      79                             END
+
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AC . . . . . . . .  B ADDR   00D0H.6 A   
+BEGIN. . . . . . .  C ADDR   0040H   A   
+COMPARAR . . . . .  C ADDR   0094H   A   
+DATOS. . . . . . .  C ADDR   0054H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   00A2H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SETMENOR . . . . .  C ADDR   007AH   A   
+SUM. . . . . . . .  C ADDR   006AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
