@@ -1,0 +1,255 @@
+A51 MACRO ASSEMBLER  18                                                                   10/10/2017 19:43:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\18.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 18.a51 SET(SMALL) DEBUG PRINT(.\Listings\18.lst) OBJECT(.\Objects
+                      \18.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para unir dos listas ordenadas 
+
+                       2     ;ascendentemente en una sola lista ordenada de la 
+
+                       3     ;misma forma. El registro DPTR contiene la dirección 
+
+                       4     ;de la localidad de memoria donde está almacenado el 
+
+                       5     ;número de elementos de la lista 1, y la lista 1 
+
+                       6     ;comienza en la siguiente localidad. Para la lista 
+
+                       7     ;2 sucede algo similar, pero con los registros R6 y R7
+
+                       8     ;Los registros R4y R5 contienen la dirección en donde
+
+                       9     ;debe comenzar la lista resultante.
+
+                      10     
+
+  0030                11     L1H EQU 30H
+
+  0031                12     L1L EQU 31H
+
+  00A2                13     DPS EQU 0A2H
+
+                      14     
+
+                      15     
+
+                      16     
+
+0000                  17                             ORG 0000H
+
+0000 803E             18                             JMP MAIN
+
+0040                  19                             ORG 0040H
+
+0040 75A200           20     MAIN:           MOV DPS,#0
+
+0043 E0               21                             MOVX A,@DPTR                    ;R0 LOCALIDAD DEL NUMERO L1
+
+0044 F8               22                             MOV R0,A                                
+
+                      23                             
+
+0045 A3               24                             INC DPTR
+
+0046 E0               25                             MOVX A,@DPTR                    ;R1 INICIO LISTA L1 
+
+0047 F9               26                             MOV R1,A
+
+                      27                             
+
+0048 75A201           28                             MOV DPS,#1
+
+004B EE               29                             MOV A,R6                        ;OBTENER LA DIRECCIÓN DE MEMORIA
+
+004C F582             30                             MOV DPL,A               
+
+004E E0               31                             MOVX A,@DPTR            ;OBTENER EL DATO EN ESA MEMORIA DEL NUMERO 
+                             L2
+
+004F FE               32                             MOV R6,A
+
+                      33                             
+
+0050 EF               34                             MOV A,R7                        ;LO MISMO CON EL INICIO DE LA LISTA
+                              L2
+
+0051 F582             35                             MOV DPL,A
+
+0053 E0               36                             MOVX A,@DPTR
+
+0054 FF               37                             MOV R7,A
+
+                      38                             
+
+0055 C290             39                             CLR P1.0
+
+                      40                             
+
+0057 E9               41     COMPARAR:       MOV A,R1                        ;COMPARAR L1 VS L2
+
+0058 B50700           42                             CJNE A,07H,DIFERENTES
+
+                      43     
+
+005B 4002             44     DIFERENTES:     JC MENOR
+
+005D 802B             45                             JMP MAYOR
+
+                      46     
+
+005F 75A200           47     MENOR:          MOV DPS,#0                      ;GUARDAR EL DPS # 0 PARA QUE NO SE PIERDA
+
+0062 858330           48                             MOV L1H,DPH
+
+0065 858231           49                             MOV L1L,DPL
+
+                      50                             
+
+0068 8C83             51                             MOV DPH,R4                      ;INGRESAR A R4 DIRECCION DEL RES H
+
+006A 8D82             52                             MOV DPL,R5                      ;RES L
+
+                      53                             
+
+006C E9               54                             MOV A,R1                        ;MOVER EL A (R1) A ESA DIRECCION
+
+006D F0               55                             MOVX @DPTR,A            ;PONERLE A ESA DIRECCIÓN EL VALOR DE LA LIS
+A51 MACRO ASSEMBLER  18                                                                   10/10/2017 19:43:48 PAGE     2
+
+                             TA MENOR
+
+                      56                             
+
+006E A3               57                             INC DPTR                        ;REGRESAR EL DPTR #0 A LA LISTA 1
+
+006F AD82             58                             MOV R5,DPL
+
+0071 AC83             59                             MOV R4,DPH
+
+0073 853083           60                             MOV DPH,L1H
+
+0076 853182           61                             MOV DPL,L1L
+
+                      62                             
+
+0079 D807             63                             DJNZ R0,L1_MOVER
+
+007B 209037           64                             JB P1.0,FIN
+
+007E D290             65                             SETB P1.0
+
+0080 8008             66                             JMP MAYOR
+
+                      67     
+
+0082 A3               68     L1_MOVER:       INC DPTR                        ;REGRESAR EL R1 AL DATO SIGUIENTE
+
+0083 E0               69                             MOVX A,@DPTR
+
+0084 F9               70                             MOV R1,A
+
+0085 2090D7           71                             JB P1.0, MENOR
+
+0088 80CD             72                             JMP COMPARAR
+
+                      73     
+
+008A 75A201           74     MAYOR:          MOV DPS,#1
+
+008D 858330           75                             MOV L1H,DPH
+
+0090 858231           76                             MOV L1L,DPL
+
+                      77                             
+
+0093 8C83             78                             MOV DPH,R4
+
+0095 8D82             79                             MOV DPL,R5
+
+                      80                             
+
+0097 EF               81                             MOV A,R7
+
+0098 F0               82                             MOVX @DPTR,A
+
+                      83                             
+
+0099 A3               84                             INC DPTR
+
+009A AD82             85                             MOV R5,DPL
+
+009C AC83             86                             MOV R4,DPH
+
+009E 853083           87                             MOV DPH,L1H
+
+00A1 853182           88                             MOV DPL,L1L
+
+                      89                             
+
+                      90                             
+
+00A4 DE07             91                             DJNZ R6,L2_MOVER
+
+00A6 20900C           92                             JB P1.0, FIN 
+
+00A9 D290             93                             SETB P1.0
+
+00AB 80B2             94                             JMP MENOR
+
+                      95     
+
+00AD A3               96     L2_MOVER:       INC DPTR
+
+00AE E0               97                             MOVX A,@DPTR
+
+00AF FF               98                             MOV R7,A
+
+00B0 2090D7           99                             JB P1.0, MAYOR
+
+00B3 80A2            100                             JMP COMPARAR
+
+                     101     
+
+00B5 80FE            102     FIN:            JMP $
+
+                     103     
+
+                     104                             END
+
+                                                     
+
+                                                     
+
+A51 MACRO ASSEMBLER  18                                                                   10/10/2017 19:43:48 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COMPARAR . . . . .  C ADDR   0057H   A   
+DIFERENTES . . . .  C ADDR   005BH   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   00A2H   A   
+FIN. . . . . . . .  C ADDR   00B5H   A   
+L1H. . . . . . . .  N NUMB   0030H   A   
+L1L. . . . . . . .  N NUMB   0031H   A   
+L1_MOVER . . . . .  C ADDR   0082H   A   
+L2_MOVER . . . . .  C ADDR   00ADH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+MAYOR. . . . . . .  C ADDR   008AH   A   
+MENOR. . . . . . .  C ADDR   005FH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
