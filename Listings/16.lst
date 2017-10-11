@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:29:20 PAGE     1
+A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:41:54 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -121,7 +121,7 @@ LOC  OBJ            LINE     SOURCE
 
 0074 A3               56                             INC DPTR                        ;el resultado_low = 0
 
-A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:29:20 PAGE     2
+A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:41:54 PAGE     2
 
 0075 F0               57                             MOVX @DPTR,A
 
@@ -141,7 +141,7 @@ LOC  OBJ            LINE     SOURCE
 
                                                      
 
-A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:29:20 PAGE     3
+A51 MACRO ASSEMBLER  16                                                                   10/10/2017 22:41:54 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

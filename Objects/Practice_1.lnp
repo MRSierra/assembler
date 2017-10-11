@@ -1,21 +1,3 @@
-".\Objects\18.obj",
-".\Objects\1.obj",
-".\Objects\2.obj",
-".\Objects\3.obj",
-".\Objects\4.obj",
-".\Objects\5.obj",
-".\Objects\6.obj",
-".\Objects\7.obj",
-".\Objects\8.obj",
-".\Objects\9.obj",
-".\Objects\10.obj",
-".\Objects\11.obj",
-".\Objects\12.obj",
-".\Objects\13_2.obj",
-".\Objects\14.obj",
-".\Objects\15.obj",
-".\Objects\16.obj",
-".\Objects\17.obj",
 ".\Objects\19.obj" 
 TO ".\Objects\Practice_1" 
 PRINT(".\Listings\Practice_1.m51") RAMSIZE(256) 

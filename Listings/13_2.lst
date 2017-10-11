@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     1
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:40:45 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -112,7 +112,7 @@ LOC  OBJ            LINE     SOURCE
                               APUNTADOR ACTUAL
 
 006E DAE4             48                             DJNZ R2,DATOS                   ;SI AÚN NO ES CERO REPITE EL PROCES
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     2
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:40:45 PAGE     2
 
                              O
 
@@ -178,7 +178,7 @@ LOC  OBJ            LINE     SOURCE
 
                       79                             END
 
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     3
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:40:45 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     1
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:43:35 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -112,7 +112,7 @@ LOC  OBJ            LINE     SOURCE
 
 0062 A931             47     SUB_CAD:        MOV R1,PSUB                             
 
-A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     2
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:43:35 PAGE     2
 
 0064 E7               48                             MOV A,@R1
 
@@ -174,7 +174,7 @@ LOC  OBJ            LINE     SOURCE
 
                                                      
 
-A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     3
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:43:35 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
