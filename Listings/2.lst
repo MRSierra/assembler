@@ -1,0 +1,83 @@
+A51 MACRO ASSEMBLER  2                                                                    10/10/2017 22:29:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\2.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 2.a51 SET(SMALL) DEBUG PRINT(.\Listings\2.lst) OBJECT(.\Objects\2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 803E              2             SJMP INICIO
+
+0040                   3             ORG 0040H
+
+0040 7425              4                             INICIO:  MOV A, #25H
+
+0042 2401              5                                              ADD A, #1H
+
+0044 2401              6                                              ADD A, #1H
+
+0046 2401              7                                              ADD A, #1H
+
+0048 2401              8                                              ADD A, #1H
+
+004A 2401              9                                              ADD A, #1H
+
+004C 2401             10                                              ADD A, #1H
+
+004E 2401             11                                              ADD A, #1H
+
+0050 2401             12                                              ADD A, #1H
+
+0052 2401             13                                              ADD A, #1H
+
+0054 2401             14                                              ADD A, #1H
+
+0056 2401             15                                              ADD A, #1H
+
+0058 2401             16                                              ADD A, #1H
+
+005A 14               17                                              DEC A
+
+005B 14               18                                              DEC A
+
+005C 14               19                                              DEC A
+
+005D 14               20                                              DEC A
+
+005E 14               21                                              DEC A
+
+005F 14               22                                              DEC A
+
+0060 14               23                                              DEC A
+
+0061 14               24                                              DEC A
+
+0062 14               25                                              DEC A
+
+0063 14               26                                              DEC A
+
+0064 14               27                                              DEC A
+
+0065 14               28                                              DEC A
+
+                      29                                              END
+
+A51 MACRO ASSEMBLER  2                                                                    10/10/2017 22:29:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+INICIO . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     1
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -108,13 +108,15 @@ LOC  OBJ            LINE     SOURCE
 
 006C 0C               46                             INC R4
 
-006D 0C               47                             INC R4
+006D 0C               47                             INC R4                                  ;CAMBIA LAS DIRECCIONES DEL
+                              APUNTADOR ACTUAL
 
-006E DAE4             48                             DJNZ R2,DATOS
+006E DAE4             48                             DJNZ R2,DATOS                   ;SI AÚN NO ES CERO REPITE EL PROCES
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     2
+
+                             O
 
 0070 901903           49                             MOV DPTR,#1903H
-
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     2
 
 0073 E8               50                             MOV A,R0
 
@@ -134,7 +136,7 @@ LOC  OBJ            LINE     SOURCE
 
                       58                             
 
-007A 75D000           59     SETMENOR:       MOV PSW, #00H
+007A 75D000           59     SETMENOR:       MOV PSW, #00H                   ;PASA EL MENOR A MEMORIA
 
 007D 75A200           60                             MOV DPS,#0
 
@@ -176,7 +178,7 @@ LOC  OBJ            LINE     SOURCE
 
                       79                             END
 
-A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 01:43:03 PAGE     3
+A51 MACRO ASSEMBLER  13_2                                                                 10/10/2017 22:29:20 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------

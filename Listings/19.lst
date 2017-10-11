@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  19                                                                   10/10/2017 01:51:14 PAGE     1
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.5.0
@@ -8,8 +8,173 @@ ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 19.a51 SET(SMALL) DEBUG P
 
 LOC  OBJ            LINE     SOURCE
 
-*** WARNING #A41 IN 0 (19.a51, LINE 0): MISSING 'END' STATEMENT
-A51 MACRO ASSEMBLER  19                                                                   10/10/2017 01:51:14 PAGE     2
+                       1     ;19)    Realiza las siguientes rutinas para el manejo de cadenas:
+
+                       2     ;       Insertar una subcadena (SUB) en una cadena (CAD) a partir de cierta posición (POS).
+
+                       3     ;       Encontrar una subcadena (SUB) en una cadena (CAD), indicando la posición donde inic
+                             ia (POS).
+
+                       4     ;       Borrar una cierta cantidad de caracteres (N) de una cadena (CAD) a partir de una po
+                             sición (POS).
+
+                       5     ;       Copiar de una cadena (CAD) una cierta cantidad de caracteres (N) a una subcadena (S
+                             UB).
+
+                       6     ;* Las cadenas terminan con el ASCII 0.
+
+                       7     ;* La cadena CAD inicia en la localidad 40H de RAM.
+
+                       8     ;* La cadena SUB inicia en la localidad 45H de RAM
+
+                       9     ;* El número POS está en el registro R2.
+
+                      10     ;* El número N está en el registro R3.
+
+                      11     
+
+  002A                12     DPS EQU 02AH
+
+  0030                13     PCAD EQU 30H                    ;DIRECCIÓN CADENA
+
+  0031                14     PSUB EQU 31H                    ;DIRECCIÓN SUBCADENA
+
+  0032                15     NUM EQU 32H                             ;NUMERO TOTAL
+
+                      16     
+
+                      17     
+
+0000                  18                     ORG 0000H
+
+0000 803E             19                     JMP MAIN
+
+0040                  20                     ORG 0040H
+
+                      21     
+
+0040 753040           22     MAIN:           MOV PCAD,#40H           ;GUARDAR TODOS LOS APUNTADORES
+
+0043 753145           23                             MOV PSUB,#45H
+
+0046 8A32             24                             MOV NUM,R2
+
+                      25                             
+
+0048 DA00             26                             DJNZ R2,POINT_POS       ;SI LA POS NO ES 0 RECORRER
+
+                      27                             
+
+004A 0530             28     POINT_POS:      INC PCAD                                ;INCREMENTAMOS EL APUNTADOR DE LA C
+                             ADENA
+
+004C DAFC             29                             DJNZ R2,POINT_POS               ;SI NO ES 0 VOLVER A DISMINUIR
+
+                      30                             
+
+004E AB30             31                             MOV R3, PCAD
+
+0050 EB               32                             MOV A,R3
+
+0051 F8               33                             MOV R0,A                                ;COMO SI FUE 0
+
+0052 E6               34                             MOV A,@R0                               ;HAY QUE COMPARAR EL DATO E
+                             N RAM
+
+0053 B43000           35                             CJNE A,#30H,STACK               ;SI NO ES IGUAL QUE 30H = 0 EN ASCI
+                             I -> METER A STACK
+
+                      36                             
+
+0056 F582             37     STACK:          MOV DPL,A                               ;MOVERL AL DPL
+
+0058 C082             38                             PUSH DPL                                ;METER A LA PILA
+
+005A 0C               39                             INC R4                                  ;CONTAR CUANTO METES A LA P
+                             ILA
+
+                      40                             
+
+005B 0B               41                             INC R3                                  ;CONTINUAS CON LA SIGUIENTE
+                              POSICIÓN
+
+005C EB               42                             MOV A,R3
+
+005D F8               43                             MOV R0,A                                
+
+005E E6               44                             MOV A,@R0                               ;HAY QUE COMPARAR EL DATO E
+                             N RAM
+
+005F B430F4           45                             CJNE A,#30H,STACK               ;SI NO ES IGUAL QUE 30H = 0 EN ASCI
+                             I -> METER A STACK
+
+                      46     
+
+0062 A931             47     SUB_CAD:        MOV R1,PSUB                             
+
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     2
+
+0064 E7               48                             MOV A,@R1
+
+0065 B43009           49                             CJNE A,#30H,IN                  ;SI NO ES EL FINAL DE LA CADENA INS
+                             ERTAR EL VALOR
+
+0068 EC               50                             MOV A,R4
+
+0069 FD               51                             MOV R5,A
+
+006A 0C               52                             INC R4
+
+006B 1530             53                             DEC PCAD
+
+006D DC0B             54                             DJNZ R4,MOVE_POINTER            ;VOLVER A AGREGAR TODO
+
+                      55                             
+
+006F 80FE             56                             JMP $
+
+                      57     
+
+0071 A830             58     IN:                     MOV R0,PCAD                             ;EN LA POSICIÓN DE PCAD
+
+0073 F6               59                             MOV @R0,A                               ;INSERTAR LO QUE ESTE EN EL
+                              ACUMULADOR
+
+0074 0531             60                             INC PSUB                                ;INCREMENTAR 1 EN PSUB
+
+0076 0530             61                             INC PCAD                                ;INCREMENTAR 1 EN PCAD
+
+0078 80E8             62                             JMP SUB_CAD
+
+                      63                             
+
+007A 0530             64     MOVE_POINTER:   INC PCAD
+
+007C DDFC             65                                     DJNZ R5,MOVE_POINTER
+
+                      66                             
+
+007E D082             67     POPSTACK:       POP DPL
+
+0080 A830             68                             MOV R0,PCAD
+
+0082 A682             69                             MOV @R0,DPL
+
+0084 1530             70                             DEC PCAD
+
+0086 DCF6             71                             DJNZ R4,POPSTACK
+
+                      72                             
+
+0088 80FE             73                             JMP $
+
+                      74                             
+
+                      75                             END
+
+                                                     
+
+A51 MACRO ASSEMBLER  19                                                                   10/10/2017 22:29:20 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -17,9 +182,21 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   002AH   A   
+IN . . . . . . . .  C ADDR   0071H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+MOVE_POINTER . . .  C ADDR   007AH   A   
+NUM. . . . . . . .  N NUMB   0032H   A   
+PCAD . . . . . . .  N NUMB   0030H   A   
+POINT_POS. . . . .  C ADDR   004AH   A   
+POPSTACK . . . . .  C ADDR   007EH   A   
+PSUB . . . . . . .  N NUMB   0031H   A   
+STACK. . . . . . .  C ADDR   0056H   A   
+SUB_CAD. . . . . .  C ADDR   0062H   A   
 
 
 REGISTER BANK(S) USED: 0 
 
 
-ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

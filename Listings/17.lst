@@ -1,0 +1,130 @@
+A51 MACRO ASSEMBLER  17                                                                   10/10/2017 22:29:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\17.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 17.a51 SET(SMALL) DEBUG PRINT(.\Listings\17.lst) OBJECT(.\Objects
+                      \17.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; A partir de la localidad 500H de RAM se encuentra una lista de palabras
+
+                       2        ; de 16 bits. En el registro R4 se encuentra el número de elementos de la lista.
+
+                       3        ; Se requiere implementar un programa que genere el promedio de los elementos de
+
+                       4        ; la lista y que guarde dicho promedio en los registros R6 y R7.
+
+                       5     
+
+0000                   6        ORG 0000H
+
+0000 803E              7        JMP main
+
+0040                   8        ORG 0040H
+
+                       9     
+
+0040                  10     main:
+
+0040 900500           11           MOV DPTR, #0500H
+
+0043 EC               12           MOV A, R4
+
+0044 75F002           13           MOV B, #02H
+
+0047 A4               14           MUL AB
+
+0048 FC               15           MOV R4, A
+
+0049 FD               16           MOV R5, A
+
+004A                  17     suma:
+
+004A E0               18           MOVX A, @DPTR
+
+004B A3               19           INC DPTR
+
+004C F5F0             20           MOV B, A
+
+004E E0               21           MOVX A, @DPTR
+
+004F 28               22           ADD A, R0
+
+0050 F8               23           MOV R0, A
+
+0051 E5F0             24           MOV A, B
+
+0053 39               25           ADDC A, R1
+
+0054 F9               26           MOV R1, A
+
+0055 DCF3             27           DJNZ R4, suma
+
+0057                  28     promedio:
+
+0057 E8               29           MOV A, R0
+
+0058 9D               30           SUBB A, R5
+
+0059 F8               31           MOV R0, A
+
+005A E9               32           MOV A, R1
+
+005B 9400             33           SUBB A, #00H
+
+005D F9               34           MOV R1, A
+
+005E 0C               35           INC R4
+
+005F B900F5           36           CJNE R1, #00H, promedio
+
+0062 E8               37           MOV A, R0
+
+0063 8D30             38           MOV 30H, R5
+
+0065 B53006           39           CJNE A, 30H, escr
+
+0068                  40     fin:
+
+0068 EC               41           MOV A, R4
+
+0069 FE               42           MOV R6, A
+
+006A E8               43           MOV A, R0
+
+006B FF               44           MOV R7, A
+
+006C 80FE             45           JMP $
+
+                      46     
+
+006E                  47     escr:
+
+006E 40F8             48           JC fin
+
+0070 80E5             49           JMP promedio
+
+                      50           END
+
+A51 MACRO ASSEMBLER  17                                                                   10/10/2017 22:29:20 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+ESCR . . . . . . .  C ADDR   006EH   A   
+FIN. . . . . . . .  C ADDR   0068H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+PROMEDIO . . . . .  C ADDR   0057H   A   
+SUMA . . . . . . .  C ADDR   004AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

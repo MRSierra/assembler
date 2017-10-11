@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  8                                                                    10/10/2017 22:29:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\8.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 8.a51 SET(SMALL) DEBUG PRINT(.\Listings\8.lst) OBJECT(.\Objects\8
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                     
+
+                       2                     ;Hacer un programa para combinar los 4 bits menos significativos del regist
+                             ro R2 
+
+                       3                     ;y los 4 bits menos significativos del registro R1 en una sola localidad de
+                              8 bits 
+
+                       4                     ;y guardarla en el registro R0. 
+
+                       5                     ;Los 4 bits menos significativos de R2 deberán ocupar los 4 bits menos sign
+                             ificativos de R0.
+
+  0050                 6                     TEMP EQU 50H
+
+  0051                 7                     RES EQU 51H
+
+                       8                             
+
+0000                   9                     ORG 0000H
+
+0000 803E             10             SJMP INICIO
+
+0040                  11             ORG 0040H
+
+                      12                             
+
+0040 EA               13                             INICIO: MOV A, R2
+
+0041 540F             14                             ANL A, #00001111b
+
+0043 F550             15                             MOV TEMP, A
+
+0045 E9               16                             MOV A, R1
+
+0046 540F             17                             ANL A,#00001111b
+
+0048 03               18                             RR A 
+
+0049 03               19                             RR A
+
+004A 03               20                             RR A
+
+004B 03               21                             RR A
+
+004C 4250             22                             ORL TEMP, A
+
+004E A850             23                             MOV R0, TEMP
+
+                      24                             END
+
+A51 MACRO ASSEMBLER  8                                                                    10/10/2017 22:29:19 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+INICIO . . . . . .  C ADDR   0040H   A   
+RES. . . . . . . .  N NUMB   0051H   A   
+TEMP . . . . . . .  N NUMB   0050H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

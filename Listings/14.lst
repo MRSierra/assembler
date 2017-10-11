@@ -1,0 +1,158 @@
+A51 MACRO ASSEMBLER  14                                                                   10/10/2017 22:29:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\14.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 14.a51 SET(SMALL) DEBUG PRINT(.\Listings\14.lst) OBJECT(.\Objects
+                      \14.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;14)    Hacer un programa para que ordene una lista de números binarios de 8 bits con signo
+                              en orden ascendente (menor a mayor). La longitud de la lista está en la localidad de memoria 1B00H 
+
+                       2     ;y la lista misma comienza en la localidad de memoria 1B01H. 
+
+                       3     ;Los números están en complemento a dos.
+
+                       4     
+
+  0020                 5             NUM EQU 20H
+
+  0021                 6             STOPH EQU 21H
+
+  0022                 7             STOPL EQU 22H
+
+0000                   8             ORG 0000H
+
+0000 803E              9             SJMP INICIO
+
+0040                  10             ORG 0040H
+
+                      11     
+
+0040 901B00           12     INICIO:         MOV DPTR, #1B00H
+
+0043 E0               13                             MOVX A, @DPTR
+
+0044 F520             14                             MOV NUM, A ;R0 tiene la longitud de la lista
+
+0046 75211B           15                             MOV STOPH, #1BH
+
+0049 752201           16                             MOV STOPL, #01H
+
+004C E520             17                             MOV A, NUM
+
+004E 3522             18                             ADDC A, STOPL
+
+0050 F522             19                             MOV STOPL, A
+
+0052 1522             20                             DEC STOPL
+
+0054 7400             21                             MOV A, #00H
+
+0056 3521             22                             ADDC A, STOPH
+
+0058 F521             23                             MOV STOPH, A
+
+005A A3               24                             INC DPTR ;DPTR = 1B01H
+
+005B E0               25     CICLO:          MOVX A, @DPTR 
+
+005C F9               26                             MOV R1, A ;R1 = Primer elemento de la lista
+
+005D AB83             27                             MOV R3, DPH
+
+005F AC82             28                             MOV R4, DPL
+
+0061 A3               29                             INC DPTR
+
+0062 E0               30                             MOVX A, @DPTR 
+
+0063 AD83             31                             MOV R5, DPH
+
+0065 AE82             32                             MOV R6, DPL
+
+0067 FA               33                             MOV R2, A ;R2 =Contiene el segundo numero 
+
+0068 E9               34                             MOV A, R1
+
+0069 9A               35                             SUBB A, R2
+
+006A 4019             36                             JC OTRA
+
+006C E9               37                             MOV A, R1
+
+006D 8D83             38                             MOV DPH, R5
+
+006F 8E82             39                             MOV DPL, R6
+
+0071 F0               40                             MOVX @DPTR, A
+
+0072 8B83             41                             MOV DPH, R3
+
+0074 8C82             42                             MOV DPL, R4
+
+0076 EA               43                             MOV A, R2
+
+0077 F0               44                             MOVX @DPTR, A
+
+                      45                             ;XCH A, R2
+
+                      46                             ;MOV R1, A
+
+0078 A3               47     MAYOR:          INC DPTR
+
+0079 E583             48                             MOV A, DPH
+
+007B B521DD           49                             CJNE A, STOPH, CICLO
+
+007E E582             50                             MOV A, DPL
+
+0080 B522D8           51                             CJNE A, STOPL, CICLO
+
+0083 80FE             52                             SJMP $
+
+0085 EA               53     OTRA:           MOV A, R2
+
+0086 F9               54                             MOV R1, A
+
+0087 ED               55                             MOV A, R5
+
+0088 FB               56                             MOV R3, A
+
+A51 MACRO ASSEMBLER  14                                                                   10/10/2017 22:29:20 PAGE     2
+
+0089 EE               57                             MOV A, R6
+
+008A FC               58                             MOV R4, A
+
+008B 80CE             59                             SJMP CICLO
+
+                      60                             END
+
+                                                     
+
+A51 MACRO ASSEMBLER  14                                                                   10/10/2017 22:29:20 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CICLO. . . . . . .  C ADDR   005BH   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+INICIO . . . . . .  C ADDR   0040H   A   
+MAYOR. . . . . . .  C ADDR   0078H   A   
+NUM. . . . . . . .  N NUMB   0020H   A   
+OTRA . . . . . . .  C ADDR   0085H   A   
+STOPH. . . . . . .  N NUMB   0021H   A   
+STOPL. . . . . . .  N NUMB   0022H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

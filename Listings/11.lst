@@ -1,0 +1,122 @@
+A51 MACRO ASSEMBLER  11                                                                   10/10/2017 22:29:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\11.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 11.a51 SET(SMALL) DEBUG PRINT(.\Listings\11.lst) OBJECT(.\Objects
+                      \11.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para mover el bloque de memoria que comienza en la dirección 1A00H 
+
+                       2     ;y termina en la dirección 1BFFH, a la sección de memoria que comienza en la 1C00H.
+
+                       3     ;El programa debe terminar cuando se haya transferido todo el bloque  o cuando se encuentre
+                              un dato con valor FFH.
+
+                       4             
+
+  0020                 5             CONTADOR EQU 20H
+
+  0021                 6             CONTADOR2 EQU 21H
+
+  001A                 7             INICIO1 EQU 1AH
+
+  001B                 8             INICIO2 EQU 1BH
+
+  001C                 9             FIN1 EQU 1CH
+
+  001D                10             FIN2 EQU 1DH
+
+0000                  11             ORG 0000H
+
+0000 803E             12             SJMP INICIO
+
+0040                  13             ORG 0040H
+
+                      14                     
+
+0040 752101           15                     INICIO: MOV CONTADOR2, #1H
+
+0043 752000           16                                     MOV CONTADOR, #00H
+
+0046 781A             17                                     MOV R0, #1AH
+
+0048 7900             18                                     MOV R1, #00H
+
+004A 7A1C             19                                     MOV R2, #1CH
+
+004C 7B00             20                                     MOV R3, #00H
+
+004E 8000             21                                     SJMP ESCRITURA
+
+0050 8883             22     ESCRITURA:              MOV DPH, R0
+
+0052 8982             23                                     MOV DPL, R1
+
+0054 E0               24                                     MOVX A, @DPTR
+
+0055 8A83             25                                     MOV DPH, R2
+
+0057 8B82             26                                     MOV DPL, R3
+
+0059 F0               27                                     MOVX @DPTR, A
+
+005A B4FF02           28                                     CJNE A, #0FFH, KEEP
+
+005D 80FE             29                                     SJMP $
+
+                      30     
+
+005F B9FF0B           31     KEEP:                   CJNE R1, #0FFH, AUMENTAR
+
+0062 B81A0C           32                                     CJNE R0, #1AH, FIN
+
+0065 08               33                                     INC R0
+
+0066 7900             34                                     MOV R1, #00H
+
+0068 0A               35                                     INC R2
+
+0069 7B00             36                                     MOV R3, #00H
+
+006B 80E3             37                                     SJMP ESCRITURA
+
+006D 09               38     AUMENTAR:               INC R1
+
+006E 0B               39                                     INC R3
+
+006F 80DF             40                                     SJMP ESCRITURA
+
+0071 80FE             41     FIN:            SJMP $
+
+                      42                                     END             
+
+A51 MACRO ASSEMBLER  11                                                                   10/10/2017 22:29:19 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AUMENTAR . . . . .  C ADDR   006DH   A   
+CONTADOR . . . . .  N NUMB   0020H   A   
+CONTADOR2. . . . .  N NUMB   0021H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+ESCRITURA. . . . .  C ADDR   0050H   A   
+FIN. . . . . . . .  C ADDR   0071H   A   
+FIN1 . . . . . . .  N NUMB   001CH   A   
+FIN2 . . . . . . .  N NUMB   001DH   A   
+INICIO . . . . . .  C ADDR   0040H   A   
+INICIO1. . . . . .  N NUMB   001AH   A   
+INICIO2. . . . . .  N NUMB   001BH   A   
+KEEP . . . . . . .  C ADDR   005FH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

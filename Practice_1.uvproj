@@ -48,7 +48,7 @@
           <OutputName>Practice_1</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listings\</ListingPath>
@@ -230,7 +230,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <Size>0xffff</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -367,6 +367,96 @@
               <FileName>18.a51</FileName>
               <FileType>2</FileType>
               <FilePath>.\18.a51</FilePath>
+            </File>
+            <File>
+              <FileName>1.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\1.a51</FilePath>
+            </File>
+            <File>
+              <FileName>2.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\2.a51</FilePath>
+            </File>
+            <File>
+              <FileName>3.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\3.a51</FilePath>
+            </File>
+            <File>
+              <FileName>4.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\4.a51</FilePath>
+            </File>
+            <File>
+              <FileName>5.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\5.a51</FilePath>
+            </File>
+            <File>
+              <FileName>6.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\6.a51</FilePath>
+            </File>
+            <File>
+              <FileName>7.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\7.a51</FilePath>
+            </File>
+            <File>
+              <FileName>8.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\8.a51</FilePath>
+            </File>
+            <File>
+              <FileName>9.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\9.a51</FilePath>
+            </File>
+            <File>
+              <FileName>10.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\10.a51</FilePath>
+            </File>
+            <File>
+              <FileName>11.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\11.a51</FilePath>
+            </File>
+            <File>
+              <FileName>12.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\12.a51</FilePath>
+            </File>
+            <File>
+              <FileName>13_2.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\13_2.a51</FilePath>
+            </File>
+            <File>
+              <FileName>14.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\14.a51</FilePath>
+            </File>
+            <File>
+              <FileName>15.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\15.a51</FilePath>
+            </File>
+            <File>
+              <FileName>16.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\16.a51</FilePath>
+            </File>
+            <File>
+              <FileName>17.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\17.a51</FilePath>
+            </File>
+            <File>
+              <FileName>19.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\19.a51</FilePath>
             </File>
           </Files>
         </Group>

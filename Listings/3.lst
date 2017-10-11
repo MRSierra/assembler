@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  3                                                                    10/10/2017 22:29:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\3.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 3.a51 SET(SMALL) DEBUG PRINT(.\Listings\3.lst) OBJECT(.\Objects\3
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0000H
+
+0000 803E              2             SJMP MAIN1
+
+0040                   3                     ORG 0040H
+
+0040 2401              4     MAIN1:  ADD A,#1H
+
+0042 2401              5                     ADD A,#1H
+
+0044 2401              6                     ADD A,#1H
+
+0046 2401              7                     ADD A,#1H
+
+0048 2401              8                     ADD A,#1H
+
+004A 2401              9                     ADD A,#1H
+
+004C 2401             10                     ADD A,#1H
+
+004E 2401             11                     ADD A,#1H
+
+0050 2401             12                     ADD A,#1H
+
+0052 2401             13                     ADD A,#1H
+
+0054 80EA             14                     SJMP MAIN1
+
+                      15                     END
+
+A51 MACRO ASSEMBLER  3                                                                    10/10/2017 22:29:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN1. . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

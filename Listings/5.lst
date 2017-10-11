@@ -1,0 +1,121 @@
+A51 MACRO ASSEMBLER  5                                                                    10/10/2017 22:29:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\5.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 5.a51 SET(SMALL) DEBUG PRINT(.\Listings\5.lst) OBJECT(.\Objects\5
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+
+                       2                     ;Hacer un programa que sume 10 datos que están en la RAM interna a partir d
+                             e la dirección 30H 
+
+                       3                     ;y guarde el resultado en la dirección 40H.
+
+                       4     
+
+  0030                 5                     DA0 EQU 30H
+
+  0031                 6                     DA1 EQU 31H
+
+  0032                 7                     DA2 EQU 32H
+
+  0033                 8                     DA3 EQU 33H
+
+  0034                 9                     DA4 EQU 34H
+
+  0035                10                     DA5 EQU 35H
+
+  0036                11                     DA6 EQU 36H
+
+  0037                12                     DA7 EQU 37H
+
+  0038                13                     DA8 EQU 38H
+
+  0039                14                     DA9 EQU 39H
+
+  0040                15                     RES EQU 40H     
+
+                      16     
+
+0000                  17                     ORG 0000H
+
+0000 803E             18             SJMP INICIO
+
+0040                  19             ORG 0040H
+
+0040 753005           20                             INICIO: MOV DA0, #05H
+
+0043 753106           21                             MOV DA1, #06H
+
+0046 753210           22                             MOV DA2, #10H
+
+0049 753302           23                             MOV DA3, #02H
+
+004C 753408           24                             MOV DA4, #08H
+
+004F 753515           25                             MOV DA5, #15H
+
+0052 753634           26                             MOV DA6, #34H
+
+0055 753767           27                             MOV DA7, #67H
+
+0058 753823           28                             MOV DA8, #23H
+
+005B 753911           29                             MOV DA9, #11H
+
+005E E530             30                             MOV A, DA0
+
+0060 2531             31                             ADD A,DA1
+
+0062 2532             32                             ADD A,DA2
+
+0064 2533             33                             ADD A,DA3
+
+0066 2534             34                             ADD A,DA4
+
+0068 2535             35                             ADD A,DA5
+
+006A 2536             36                             ADD A,DA6
+
+006C 2537             37                             ADD A,DA7
+
+006E 2538             38                             ADD A,DA8
+
+0070 2539             39                             ADD A,DA9
+
+0072 F540             40                             MOV RES, A
+
+                      41                             
+
+                      42                             END
+
+A51 MACRO ASSEMBLER  5                                                                    10/10/2017 22:29:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DA0. . . . . . . .  N NUMB   0030H   A   
+DA1. . . . . . . .  N NUMB   0031H   A   
+DA2. . . . . . . .  N NUMB   0032H   A   
+DA3. . . . . . . .  N NUMB   0033H   A   
+DA4. . . . . . . .  N NUMB   0034H   A   
+DA5. . . . . . . .  N NUMB   0035H   A   
+DA6. . . . . . . .  N NUMB   0036H   A   
+DA7. . . . . . . .  N NUMB   0037H   A   
+DA8. . . . . . . .  N NUMB   0038H   A   
+DA9. . . . . . . .  N NUMB   0039H   A   
+INICIO . . . . . .  C ADDR   0040H   A   
+RES. . . . . . . .  N NUMB   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,240 @@
+A51 MACRO ASSEMBLER  15                                                                   10/10/2017 22:29:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\15.obj
+ASSEMBLER INVOKED BY: C:\Users\Mariana\C51\BIN\A51.EXE 15.a51 SET(SMALL) DEBUG PRINT(.\Listings\15.lst) OBJECT(.\Objects
+                      \15.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Hacer un programa para contar el número de bits con valor 1 que hay en un
+
+                       2     ;bloque de memoria cuya dirección inicial se encuentra almacenada en las
+
+                       3     ;localidades 1A00H y 1A01H y cuya dirección final esta almacenada en las
+
+                       4     ;localidades 1A02H y 1A03H. El número total de unos debe guardarse en las
+
+                       5     ;localidades 1A04H y 1A05H.
+
+  00A2                 6                    DPS EQU 0A2H
+
+0000                   7                    ORG 00H
+
+0000 803E              8                    JMP main
+
+0040                   9                    ORG 40H
+
+0040                  10     main:
+
+0040 901A00           11                    MOV DPTR,#1A00H
+
+                      12     
+
+                      13                    ;Lee la direccion de inicio en forma R0R1
+
+0043 E0               14                    MOVX A,@DPTR
+
+0044 F8               15                    MOV R0,A
+
+0045 A3               16                    INC DPTR
+
+0046 E0               17                    MOVX A,@DPTR
+
+0047 F9               18                    MOV R1,A
+
+                      19     
+
+                      20                    ;Lee la direccion de fin en forma R2R3
+
+0048 A3               21                    INC DPTR
+
+0049 E0               22                    MOVX A,@DPTR
+
+004A FA               23                    MOV R2,A
+
+004B A3               24                    INC DPTR
+
+004C E0               25                    MOVX A,@DPTR
+
+004D FB               26                    MOV R3,A
+
+004E A3               27                    INC DPTR
+
+                      28     
+
+                      29                    ;Comienza a leer el bloque de memoria
+
+004F 75A201           30                    MOV DPS,#1
+
+0052 8883             31                    MOV DPH,R0
+
+0054 8982             32                    MOV DPL,R1
+
+                      33                    ;Conteo unos = R4R5
+
+0056                  34     cicloByte:
+
+0056 E0               35                    MOVX A,@DPTR
+
+                      36                    ;MOV 20H,A ;Mueve el valor a verificar a ubicacion accesible por bits
+
+                      37     
+
+0057 30E002           38                    JNB ACC.0, bit1;JNB 20H, bit1
+
+005A 1194             39                    ACALL incCheck
+
+005C                  40     bit1:
+
+005C 30E102           41                    JNB ACC.1,bit2;JNB 21H, bit2
+
+005F 1194             42                    ACALL incCheck
+
+0061                  43     bit2:
+
+0061 30E202           44                    JNB ACC.2, bit3;JNB 22H, bit3
+
+0064 1194             45                    ACALL incCheck
+
+0066                  46     bit3:
+
+0066 30E302           47                    JNB ACC.3,bit4;JNB 23H, bit4
+
+0069 1194             48                    ACALL incCheck
+
+006B                  49     bit4:
+
+006B 30E402           50                    JNB ACC.4, bit5;JNB 24H, bit5
+
+006E 1194             51                    ACALL incCheck
+
+0070                  52     bit5:
+
+0070 30E502           53                    JNB ACC.5,bit6;JNB 25H, bit6
+
+0073 1194             54                    ACALL incCheck
+
+0075                  55     bit6:
+
+0075 30E602           56                    JNB ACC.6,bit7;JNB 26H, bit7
+
+0078 1194             57                    ACALL incCheck
+
+A51 MACRO ASSEMBLER  15                                                                   10/10/2017 22:29:20 PAGE     2
+
+007A                  58     bit7:
+
+007A 30E702           59                    JNB ACC.7, contCiclo;JNB 27H, contCiclo
+
+007D 1194             60                    ACALL incCheck
+
+                      61     
+
+007F                  62     contCiclo:
+
+007F A3               63                    INC DPTR
+
+                      64     
+
+0080 E582             65                    MOV A, DPL
+
+0082 B503D1           66                    CJNE A, 03H, cicloByte ;CJNE DPL, R3, cicloByte
+
+0085 E583             67                    MOV A, DPH
+
+0087 B502CC           68                    CJNE A, 02H, cicloByte ;CJNE DPH, R2, cicloByte
+
+                      69     
+
+                      70                    ;Copiar los valores de la cuenta de unos a 1A04H y 1A05H
+
+008A 75A200           71                    MOV DPS,#0
+
+008D EC               72                    MOV A,R4
+
+008E F0               73                    MOVX @DPTR,A
+
+008F A3               74                    INC DPTR
+
+0090 ED               75                    MOV A,R5
+
+0091 F0               76                    MOVX @DPTR,A
+
+                      77     
+
+0092 80FE             78     forceEnd:      SJMP $
+
+                      79     
+
+                      80     
+
+0094                  81     incCheck:
+
+                      82                    ;Verifica si ya se llenó el byte bajo de conteo R5
+
+0094 ED               83                    MOV A,R5
+
+0095 F4               84                    CPL A
+
+0096 6003             85                    JZ incHP
+
+                      86     
+
+0098 0D               87                    INC R5
+
+0099 8005             88                    JMP incLP
+
+009B                  89     incHP:
+
+                      90                    ;Verifica si ya se llenó el byte alto de conteo R4
+
+009B EC               91                    MOV A,R4
+
+009C F4               92                    CPL A
+
+009D 60F3             93                    JZ forceEnd
+
+009F 0C               94                    INC R4
+
+00A0                  95     incLP:
+
+00A0 22               96                    RET
+
+                      97     
+
+                      98                    END
+
+A51 MACRO ASSEMBLER  15                                                                   10/10/2017 22:29:20 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+BIT1 . . . . . . .  C ADDR   005CH   A   
+BIT2 . . . . . . .  C ADDR   0061H   A   
+BIT3 . . . . . . .  C ADDR   0066H   A   
+BIT4 . . . . . . .  C ADDR   006BH   A   
+BIT5 . . . . . . .  C ADDR   0070H   A   
+BIT6 . . . . . . .  C ADDR   0075H   A   
+BIT7 . . . . . . .  C ADDR   007AH   A   
+CICLOBYTE. . . . .  C ADDR   0056H   A   
+CONTCICLO. . . . .  C ADDR   007FH   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+DPS. . . . . . . .  N NUMB   00A2H   A   
+FORCEEND . . . . .  C ADDR   0092H   A   
+INCCHECK . . . . .  C ADDR   0094H   A   
+INCHP. . . . . . .  C ADDR   009BH   A   
+INCLP. . . . . . .  C ADDR   00A0H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
