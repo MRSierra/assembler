@@ -1,7 +1,7 @@
 # ASSEMBLER
 
 Fundamentos de Microprocesadores OTOÑO 2017 Profesor Mario Alberto Peredo Durán
-~Programadores:~
+*Programadores:*
 Luisa Cecilia Flores
 Julián López
 Mariana Sierra
